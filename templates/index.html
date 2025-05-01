@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Showcase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!--this should be written correctly for linking stylesheet-->
+</head>
+<body>
+    <h1><a href="templates/index.html">Recommendation System</a> </h1>
+
+
+    <!-- Movie-Based Book Search Section -->
+    <div class="search-section">
+        <form method="POST" action="{{ url_for('recommend_books') }}">
+            <input name="user_input" type="text" id="movieInput" placeholder="Enter a book">
+            <input type="button" name="submit" value="Submit">
+        </form>
+        
+    </div>
+
+    <!-- Top Recommended Books Section -->
+    <div class="recommended-section">
+        <h2>Top 50 Recommended Books</h2>
+
+        <div class="book-container">
+            {% for i in range(book_name|length) %}
+            <div class="book">
+                <img src="{{ book_image[i] }}" alt="Book Cover">
+                <h3>{{ book_name[i] }}</h3>
+                <p>Author - {{ book_author[i]}}</p>
+                <p>Publisher - {{ book_publisher[i]}}</p>
+                <p>Ratings - {{ book_ratings[i]}}</p>
+            </div>
+            {% endfor %}
+        </div>  
+    </div>
+</body>
+</html>
