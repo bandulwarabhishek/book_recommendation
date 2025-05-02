@@ -6,6 +6,24 @@ body {
     margin: 0;
     padding: 20px;
 }
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+.home-section {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8f9fa;
+}
 
 
 /* Book Container Styling */

@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!--this should be written correctly for linking stylesheet-->
 </head>
 <body>
-    <h1><a href="templates/index.html">Recommendation System</a> </h1>
+    <h1><a href="{{ url_for('index') }}">Recommendation System</a> </h1>
 
 
     <!-- Movie-Based Book Search Section -->
     <div class="search-section">
         <form method="POST" action="{{ url_for('recommend_books') }}">
             <input name="user_input" type="text" id="movieInput" placeholder="Enter a book">
-            <input type="button" name="submit" value="Submit">
+            <input type="submit" name="submit" value="Submit">
         </form>
         
     </div>

@@ -3,10 +3,10 @@ import pickle
 import re
 import numpy as np
 
-popular_df = pickle.load(open('popular.pkl','rb'))
-books = pickle.load(open('books.pkl','rb'))
-similarity = pickle.load(open('similarity_scores.pkl','rb'))
-user_movie = pickle.load(open('user_movie.pkl','rb'))
+popular_df = pickle.load(open('model/popular.pkl','rb'))
+books = pickle.load(open('model/books.pkl','rb'))
+similarity = pickle.load(open('model/similarity_scores.pkl','rb'))
+user_movie = pickle.load(open('model/user_movie.pkl','rb'))
 
 app = Flask(__name__)
 
@@ -27,9 +27,9 @@ def index():
                            )
 
 
-@app.route('/recommend')
-def recommend_page():
-    return render_template("recommend.html")
+# @app.route('/home')
+# def home():
+#     return render_template("index.html")
 
 
 @app.route('/recommend_books',methods=['POST'])
