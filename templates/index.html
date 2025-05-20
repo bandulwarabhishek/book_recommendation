@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Showcase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!--this should be written correctly for linking stylesheet-->
 </head>
 <body>
@@ -19,21 +20,186 @@
         
     </div>
 
-    <!-- Top Recommended Books Section -->
-    <div class="recommended-section">
-        <h2>Top 50 Recommended Books</h2>
 
-        <div class="book-container">
-            {% for i in range(book_name|length) %}
-            <div class="book">
-                <img src="{{ book_image[i] }}" alt="Book Cover">
-                <h3>{{ book_name[i] }}</h3>
-                <p>Author - {{ book_author[i]}}</p>
-                <p>Publisher - {{ book_publisher[i]}}</p>
-                <p>Ratings - {{ book_ratings[i]}}</p>
-            </div>
-            {% endfor %}
-        </div>  
+    <!-- Top 50 Recommended Books Section -->
+    <div class="recommended-section" style="margin-top: 50px;">
+        <h2 class="custom_heading">Top 50 Recommended Books</h2>
+               <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" > 
+                <div class="carousel-inner" >
+                    {% for i in range(0, top_50.book_name|length, 5) %}  <!-- 4 products per slide -->
+                    <div class="carousel-item {% if i == 0 %}active{% endif %}" >
+                        <div class="d-flex justify-content-center gap-3">
+                            {% for j in range(i, i+5) %}
+                                {% if j < top_50.book_name|length %}
+                                <div class="card text-center small-card" style="width: 18rem;" >
+                                    <img src="{{ top_50.book_image[j] }}" class="card-img-top" alt="Product {{ j }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ top_50.book_name[j] }}</h5>
+                                        <p class="card-text">Author - {{ top_50.book_author[j] }}</p>
+                                        <p class="text-danger">Publisher - {{ top_50.book_publisher[j] }}</p>  
+                                        <!-- <a href="#" class="btn btn-primary">Buy Now</a> -->
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+    <!-- Carousel Navigation -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
     </div>
+
+        <!-- Country Books Section -->
+    <div class="recommended-section" style="margin-top: 50px;">
+        <h2 class="custom_heading">Books popular in India</h2>
+               <div id="productCarousel2" class="carousel slide" data-bs-ride="carousel" > 
+                <div class="carousel-inner" >
+                    {% for i in range(0, countrywise_data.Book_Title_title|length, 5) %}  <!-- 4 products per slide -->
+                    <div class="carousel-item {% if i == 0 %}active{% endif %}" >
+                        <div class="d-flex justify-content-center gap-3">
+                            {% for j in range(i, i+5) %}
+                                {% if j < countrywise_data.Book_Title_title|length %}
+                                <div class="card text-center small-card" style="width: 18rem;" >
+                                    <img src="{{ countrywise_data['Image-URL-S'][j] }}" class="card-img-top" alt="Product {{ j }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ countrywise_data.Book_Title_title[j] }}</h5>
+                                        <p class="card-text">Author - {{ countrywise_data.Book_Author_title[j] }}</p>
+                                        <p class="text-danger">Publisher - {{ countrywise_data.Publisher_title[j] }}</p>  
+                                        <!-- <a href="#" class="btn btn-primary">Buy Now</a> -->
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+    <!-- Carousel Navigation -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel2" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel2" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+    </div>
+
+    <!-- Books for Children -->
+    <div class="recommended-section" style="margin-top: 50px;">
+            <h2 class="custom_heading">Recommendation for Children</h2>
+                   <div id="productCarousel3" class="carousel slide" data-bs-ride="carousel" > 
+                    <div class="carousel-inner" >
+                        {% for i in range(0, data.Book_Title_title|length, 5) %}  <!-- 3 products per slide -->
+                        <div class="carousel-item {% if i == 0 %}active{% endif %}" >
+                            <div class="d-flex justify-content-center gap-3">
+                                {% for j in range(i, i+5) %}
+                                    {% if j < data.Book_Title_title|length %}
+                                    <div class="card text-center small-card" style="width: 18rem;" >
+                                        <img src="{{ data['Image-URL-S'][j] }}" class="card-img-top" alt="Product {{ j }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ data.Book_Title_title[j] }}</h5>
+                                            <p class="card-text">Author - {{ data.Book_Author_title[j] }}</p>
+                                            <p class="text-danger">Publisher - {{ data.Publisher_title[j] }}</p>
+                                            <!-- <a href="#" class="btn btn-primary">Buy Now</a> -->
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+    
+        <!-- Carousel Navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel3" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel3" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- Books for Adults -->
+    <div class="recommended-section" style="margin-top: 50px;">
+            <h2 class="custom_heading">Recommendation for Adults</h2>
+                   <div id="productCarousel4" class="carousel slide" data-bs-ride="carousel" > 
+                    <div class="carousel-inner" >
+                        {% for i in range(0, adult_books.Book_Title_title|length, 5) %}  <!-- 3 products per slide -->
+                        <div class="carousel-item {% if i == 0 %}active{% endif %}" >
+                            <div class="d-flex justify-content-center gap-3">
+                                {% for j in range(i, i+5) %}
+                                    {% if j < adult_books.Book_Title_title|length %}
+                                    <div class="card text-center small-card" style="width: 18rem;" >
+                                        <img src="{{ adult_books['Image-URL-S'][j] }}" class="card-img-top" alt="Product {{ j }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ adult_books.Book_Title_title[j] }}</h5>
+                                            <p class="card-text">Author - {{ adult_books.Book_Author_title[j] }}</p>
+                                            <p class="text-danger">Publisher - {{ adult_books.Publisher_title[j] }}</p>
+                                            <!-- <a href="#" class="btn btn-primary">Buy Now</a> -->
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+    
+        <!-- Carousel Navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel4" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel4" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- Books for Seniors -->
+    <div class="recommended-section" style="margin-top: 50px;">
+            <h2 class="custom_heading">Recommendation for Elders</h2>
+                   <div id="productCarousel5" class="carousel slide" data-bs-ride="carousel" > 
+                    <div class="carousel-inner" >
+                        {% for i in range(0, elderly_book.Book_Title_title|length, 5) %}  <!-- 3 products per slide -->
+                        <div class="carousel-item {% if i == 0 %}active{% endif %}" >
+                            <div class="d-flex justify-content-center gap-3">
+                                {% for j in range(i, i+5) %}
+                                    {% if j < elderly_book.Book_Title_title|length %}
+                                    <div class="card text-center small-card" style="width: 18rem;" >
+                                        <img src="{{ elderly_book['Image-URL-S'][j] }}" class="card-img-top" alt="Product {{ j }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ elderly_book.Book_Title_title[j] }}</h5>
+                                            <p class="card-text">Author - {{ elderly_book.Book_Author_title[j] }}</p>
+                                            <p class="text-danger">Publisher - {{ elderly_book.Publisher_title[j] }}</p>   
+                                            <!-- <a href="#" class="btn btn-primary">Buy Now</a> -->
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+    
+        <!-- Carousel Navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel5" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel5" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

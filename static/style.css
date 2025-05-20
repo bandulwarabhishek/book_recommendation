@@ -6,6 +6,42 @@ body {
     margin: 0;
     padding: 20px;
 }
+.custom_heading{
+    font-weight: bold;
+    text-align: left;
+}
+.carousel-control-prev-icon {
+    background-color: black;
+}
+.carousel-control-next-icon {
+    background-color: black;
+}
+
+.card {
+    height: 400px; /* Medium height */
+    overflow: hidden; /* Prevents content overflow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures balanced spacing */
+}
+.card-body {
+    flex-grow: 1; /* Allows flexible content fitting */
+    overflow: hidden; /* Prevents unwanted overflow */
+}
+.small-card {
+    height: 250px; /* Adjust height */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+.small-card img {
+    max-height: 120px; /* Adjust image height */
+    object-fit: cover; /* Keep image proportions */
+}
+
+.small-card .card-body {
+    padding: 10px; /* Reduce padding */
+}
+
 .btn {
     display: inline-block;
     padding: 10px 20px;
