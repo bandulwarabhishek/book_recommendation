@@ -1,13 +1,13 @@
-from flask import Flask, jsonify, request, render_template # type: ignore
+from flask import Flask, jsonify, request, render_template 
 import pickle
 import re
-import numpy as np # type: ignore
+import numpy as np 
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.neighbors import NearestNeighbors
 import pyarrow.parquet as pq    
 
 top_50 = pickle.load(open("model/top_50.pkl","rb"))
-books = pq.read_table("model/books.parquet","rb")
+books = pq.read_table("model/books.parquet").to_pandas()
 similarity = pickle.load(open("model/similarity_scores.pkl","rb"))
 pivot_table = pickle.load(open("model/pivot_table.pkl","rb"))
 
