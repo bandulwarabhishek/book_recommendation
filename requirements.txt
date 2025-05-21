@@ -5,3 +5,4 @@ pandas==2.0.3
 seaborn==0.10.1
 gunicorn==20.1.0
 matplotlib==3.7.1
+pyarrow==20.0.0
