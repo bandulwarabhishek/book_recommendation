@@ -2,9 +2,11 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import re
 import numpy as np 
+from pandas.core.dtypes import dtypes
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.neighbors import NearestNeighbors
 import pyarrow.parquet as pq    
+from google.cloud import bigquery
 
 top_50 = pickle.load(open("model/top_50.pkl","rb"))
 books = pq.read_table("model/books.parquet").to_pandas()
@@ -12,6 +14,7 @@ similarity = pickle.load(open("model/similarity_scores.pkl","rb"))
 pivot_table = pickle.load(open("model/pivot_table.pkl","rb"))
 
 app = Flask(__name__)
+client = bigquery.Client()
 
 # Define the route to be home
 # The decorator below links the relative route of the URL to the function it is decorating 
@@ -26,14 +29,30 @@ def get_country_books():
     if 'books' not in globals():
         raise   ValueError("Error: The 'books' dataframe is not defined.")
     
-    # Filter the books DataFrame for Indian books
-    sorted_books = books[books['Country']=='india']
-    sorted_books = sorted_books.drop_duplicates('Book_Title_title')
-    sorted_books = sorted_books.sort_values(by='popularity_score',ascending=False).head(20)[['Book_Title_title','Image-URL-S','Book_Author_title','Publisher_title']]
+    # # Filter the books DataFrame for Indian books
+    # sorted_books = books[books['Country']=='india']
+    # sorted_books = sorted_books.drop_duplicates('Book_Title_title')
+    # sorted_books = sorted_books.sort_values(by='popularity_score',ascending=False).head(20)[['Book_Title_title','Image-URL-S','Book_Author_title','Publisher_title']]
     
-    country = sorted_books.to_dict(orient='list')
+    # country = sorted_books.to_dict(orient='list')
 
-    return country
+    query = """
+        SELECT DISTINCT Book_Title_title,`Image-URL-S`,Book_Author_title,Publisher_title, count(r.User_ID)as no_of_ratings,avg(book_rating)as avgrating, u.Country 
+        FROM `bookrecommender-460711.bookrec.Book` as b 
+        JOIN `bookrecommender-460711.bookrec.Rating` as r on r.ISBN = b.ISBN
+        JOIN `bookrecommender-460711.bookrec.Users` as u on u.User_ID = r.User_ID
+        WHERE Country='india'
+        group by r.ISBN, Book_Title_title, Country, `Image-URL-S`, Book_Author_title, Publisher_title
+        HAVING avgrating > 5
+        ORDER BY no_of_ratings DESC
+        LIMIT 20
+    """
+    #RUN QUERY
+    query_job = client.query(query)
+    result_df = query_job.to_dataframe()
+    result = result_df.to_dict(orient='list')
+
+    return result
 
 # ------------------------------------------------------------------------------------------------------------
 
@@ -50,36 +69,68 @@ def get_top50_books():
 # -----------------------------------------------------------------------------------------------------------
 
 def get_books_childs():
-    books_for_child = books[(books['age_group']== 'Child') & (books['No_of_ratings'] > 500)].sort_values(by='No_of_ratings',ascending=False).drop_duplicates('Book_Title_title')
 
-    books_for_child= books_for_child[['Book_Title_title','Image-URL-S','Book_Author_title','Publisher_title']]
+    query = """
+        SELECT DISTINCT b.Book_Title_title,`Image-URL-S`,Book_Author_title,Publisher_title,count(b.Book_Title_title) AS bookcount,avg(r.Book_Rating) as avgrating
+        FROM `bookrecommender-460711.bookrec.Book` AS b
+        JOIN `bookrecommender-460711.bookrec.Rating` AS r ON b.ISBN = r.ISBN
+        JOIN `bookrecommender-460711.bookrec.Users` AS u ON r.User_ID = u.User_ID
+        WHERE u.age_group='Child'
+        GROUP BY b.Book_Title_title, r.Book_Rating,`Image-URL-S`,Book_Author_title,Publisher_title
+        HAVING avgrating > 5
+        ORDER BY bookcount desc
+        LIMIT 20;
+    """    
 
-    #Convert the DataFrame to a list of dictionaries
-    item = books_for_child.to_dict(orient='list')
-    
-    return item
+    #RUN QUERY
+    query_job = client.query(query)
+    result_df = query_job.to_dataframe()
+    result = result_df.to_dict(orient='list')
+
+    return result
 # ---------------------------------------------------------------------------------------------------------
 
 def get_books_adults():
-    books_for_adults =books[(books['age_group']== 'Adult') & (books['No_of_ratings'] > 500)].sort_values(by='No_of_ratings',ascending=False).drop_duplicates('Book_Title_title')
 
-    books_for_adults= books_for_adults[['Book_Title_title','Image-URL-S','Book_Author_title','Publisher_title']]
+    query = """
+        SELECT DISTINCT b.Book_Title_title,`Image-URL-S`,Book_Author_title,Publisher_title,count(b.Book_Title_title) AS bookcount,avg(r.Book_Rating) as avgrating
+        FROM `bookrecommender-460711.bookrec.Book` AS b
+        JOIN `bookrecommender-460711.bookrec.Rating` AS r ON b.ISBN = r.ISBN
+        JOIN `bookrecommender-460711.bookrec.Users` AS u ON r.User_ID = u.User_ID
+        WHERE u.age_group='Adult'
+        GROUP BY b.Book_Title_title, `Image-URL-S`,Book_Author_title,Publisher_title
+        HAVING avgrating > 5
+        ORDER BY bookcount desc
+        LIMIT 20;
+    """
+    #RUN QUERY
+    query_job = client.query(query)
+    result_df = query_job.to_dataframe()
+    result = result_df.to_dict(orient='list')
 
-    #Convert the DataFrame to a list of dictionaries
-    item = books_for_adults.to_dict(orient='list')
-
-    return item
+    return result
 # ----------------------------------------------------------------------------------------------------------
 
 def get_books_senior():
-    books_for_senior = books[(books['age_group']== 'Senior') & (books['No_of_ratings'] > 500)].sort_values(by='No_of_ratings',ascending=False).drop_duplicates('Book_Title_title')
 
-    books_for_senior= books_for_senior[['Book_Title_title','Image-URL-S','Book_Author_title','Publisher_title']]
-
-    #Convert the DataFrame to a list of dictionaries
-    item = books_for_senior.to_dict(orient='list')
+    query = """
+        SELECT DISTINCT b.Book_Title_title,`Image-URL-S`,Book_Author_title,Publisher_title, count(b.Book_Title_title) AS bookcount,avg(r.Book_Rating) as avgrating
+        FROM `bookrecommender-460711.bookrec.Book` AS b
+        JOIN `bookrecommender-460711.bookrec.Rating` AS r ON b.ISBN = r.ISBN
+        JOIN `bookrecommender-460711.bookrec.Users` AS u ON r.User_ID = u.User_ID
+        WHERE u.age_group='Senior'
+        GROUP BY b.Book_Title_title, r.Book_Rating, `Image-URL-S`,Book_Author_title,Publisher_title
+        HAVING avgrating > 5
+        ORDER BY bookcount desc
+        LIMIT 20;
+    """
     
-    return item
+    #RUN QUERY
+    query_job = client.query(query)
+    result_df = query_job.to_dataframe()
+    result = result_df.to_dict(orient='list')
+
+    return result
 
 # ----------------------------------------------------------------------------------------------------------
 

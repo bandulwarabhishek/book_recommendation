@@ -1,4 +1,4 @@
-FROM python:alpine@sha256:452682e4648deafe431ad2f2391d726d7c52f0ff291be8bd4074b10379bb89ff
+FROM python:3.10.2 
 COPY . /app 
 WORKDIR /app
 # Copy the requirements file into the container  
