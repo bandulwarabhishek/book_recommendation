@@ -4,6 +4,7 @@ import re
 import numpy as np 
 import pyarrow.parquet as pq    
 from google.cloud import bigquery
+import db_dtypes # type: ignore
 
 top_50 = pickle.load(open("model/top_50.pkl","rb"))
 books = pq.read_table("model/books.parquet").to_pandas()
