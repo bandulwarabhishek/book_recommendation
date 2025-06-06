@@ -4,7 +4,7 @@ WORKDIR /app
 # Copy the requirements file into the container  
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-EXPOSE $PORT
+EXPOSE 8080
 CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "main:app"]
 
 
