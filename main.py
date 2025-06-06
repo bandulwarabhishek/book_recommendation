@@ -2,9 +2,6 @@ from flask import Flask, jsonify, request, render_template
 import pickle
 import re
 import numpy as np 
-from pandas.core.dtypes import dtypes
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.neighbors import NearestNeighbors
 import pyarrow.parquet as pq    
 from google.cloud import bigquery
 

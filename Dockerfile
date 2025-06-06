@@ -1,11 +1,11 @@
-FROM python:3.10.2 
+FROM python:alpine
 COPY . /app 
 WORKDIR /app
 # Copy the requirements file into the container  
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 EXPOSE $PORT
-CMD gunicorn --bind 0.0.0.0:$PORT main:app
+CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "main:app"]
 
 
 # FROM cmd-it is taking as the base image 
