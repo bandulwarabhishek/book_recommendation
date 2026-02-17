@@ -1,12 +1,13 @@
-FROM python:alpine@sha256:b4d299311845147e7e47c970566906caf8378a1f04e5d3de65b5f2e834f8e3bf
-# Copy only necessary files (ignoring venv)
-COPY . . 
+FROM python:3.10-slim
+# Use a specific SHA256 digest for consistency and security
 WORKDIR /app
 # Copy the requirements file into the container  
 COPY requirements.txt .
-RUN pip install -r requirements.txt
-EXPOSE 8080
-CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "main:app"]
+RUN pip install --no-cache-dir -r requirements.txt
+# Copy only necessary files (ignoring venv)
+COPY . . 
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "main:app"]
 
 
 # FROM cmd-it is taking as the base image 
