@@ -1,0 +1,28 @@
+[2026-03-03 15:26:42,381 root - INFO - ====================Data Ingestion log started.==================== ]
+[2026-03-03 15:26:42,381 root - INFO - Data Ingestion Config: DatasetConfig(dataset_download_url='https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
+[2026-03-03 15:26:42,381 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Book-Ratings.csv')]
+[2026-03-03 15:26:42,383 root - INFO - Data Transformation Config: DataTransformationConfig(clean_data_file_path='artifacts_config\\dataset\\clean_data\\clean_data.csv', transformed_data_dir='artifacts_config\\dataset\\transformed_data')]
+[2026-03-03 15:26:42,383 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Book-Ratings.csv')]
+[2026-03-03 15:26:42,390 root - INFO - Downloading data from https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 15:26:47,982 root - INFO - Data downloaded successfully and saved at artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 15:26:48,682 root - INFO - Extracting zip file: artifacts_config\dataset\raw_data\books_data.zip into directory: artifacts_config\dataset\ingested_data]
+[2026-03-03 15:26:48,682 root - INFO - ====================Data Ingestion completed. ==================== 
+
+]
+[2026-03-03 15:26:48,682 root - INFO - ====================Data Validation log started.==================== ]
+[2026-03-03 15:26:51,342 root - INFO -  Shape of ratings data file: (1149780, 3)]
+[2026-03-03 15:26:51,343 root - INFO -  Shape of books data file: (271360, 8)]
+[2026-03-03 15:26:52,829 root - INFO -  Shape of the final clean dataset: (59850, 9)]
+[2026-03-03 15:26:53,154 root - INFO - Saved cleaned data to artifacts_config\dataset\clean_data]
+[2026-03-03 15:26:53,176 root - INFO - Saved final_rating serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 15:26:53,262 root - INFO - ====================Data Validation log completed.==================== 
+
+]
+[2026-03-03 15:26:53,262 root - INFO - ====================Data Transformation log started.==================== ]
+[2026-03-03 15:26:53,565 root - INFO -  Shape of book pivot table: (742, 888)]
+[2026-03-03 15:26:53,580 root - INFO - Saved pivot table data to artifacts_config\dataset\transformed_data]
+[2026-03-03 15:26:53,582 root - INFO - Saved book_names serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 15:26:53,588 root - INFO - Saved book_pivot serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 15:26:53,590 root - INFO - ====================Data Transformation log completed.==================== 
+
+]

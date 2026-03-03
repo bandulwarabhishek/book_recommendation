@@ -1,0 +1,30 @@
+[2026-03-03 18:09:25,751 root - INFO - ====================Data Ingestion log started.==================== ]
+[2026-03-03 18:09:25,751 root - INFO - Data Ingestion Config: DatasetConfig(dataset_download_url='https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
+[2026-03-03 18:09:25,751 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Book-Ratings.csv')]
+[2026-03-03 18:09:25,752 root - INFO - Data Transformation Config: DataTransformationConfig(clean_data_file_path='artifacts_config\\dataset\\clean_data\\clean_data.csv', transformed_data_dir='artifacts_config\\dataset\\transformed_data')]
+[2026-03-03 18:09:25,752 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Book-Ratings.csv')]
+[2026-03-03 18:09:25,752 root - INFO - Model Trainer Config: ModelTrainerConfig(transformed_data_dir='artifacts_config\\dataset\\transformed_data', trained_model_dir='artifacts_config\\trained_model', trained_model_name='model.pkl')]
+[2026-03-03 18:09:25,761 root - INFO - Downloading data from https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 18:09:32,693 root - INFO - Data downloaded successfully and saved at artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 18:09:33,445 root - INFO - Extracting zip file: artifacts_config\dataset\raw_data\books_data.zip into directory: artifacts_config\dataset\ingested_data]
+[2026-03-03 18:09:33,445 root - INFO - ====================Data Ingestion completed. ==================== 
+
+]
+[2026-03-03 18:09:33,445 root - INFO - ====================Data Validation log started.==================== ]
+[2026-03-03 18:09:36,388 root - INFO -  Shape of ratings data file: (1149780, 3)]
+[2026-03-03 18:09:36,388 root - INFO -  Shape of books data file: (271360, 8)]
+[2026-03-03 18:09:38,131 root - INFO -  Shape of the final clean dataset: (59850, 9)]
+[2026-03-03 18:09:38,480 root - INFO - Saved cleaned data to artifacts_config\dataset\clean_data]
+[2026-03-03 18:09:38,500 root - INFO - Saved final_rating serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 18:09:38,588 root - INFO - ====================Data Validation log completed.==================== 
+
+]
+[2026-03-03 18:09:38,588 root - INFO - ====================Data Transformation log started.==================== ]
+[2026-03-03 18:09:38,974 root - INFO -  Shape of book pivot table: (742, 888)]
+[2026-03-03 18:09:38,989 root - INFO - Saved pivot table data to artifacts_config\dataset\transformed_data]
+[2026-03-03 18:09:38,990 root - INFO - Saved book_names serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 18:09:38,996 root - INFO - Saved book_pivot serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 18:09:38,997 root - INFO - ====================Data Transformation log completed.==================== 
+
+]
+[2026-03-03 18:09:38,998 root - INFO - ====================Model Trainer log started.==================== ]
