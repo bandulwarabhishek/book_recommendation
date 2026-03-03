@@ -46,11 +46,32 @@ class DataIngestion:
 
         try:
             ingested_dir = self.data_ingestion_config.ingested_dir
-            print(f"Size of zip file: {os.path.getsize(zip_file_path)} bytes")
-            print(f"Is Zip:", zipfile.is_zipfile(zip_file_path))
+            print(f"Size of zip file: {os.path.getsize(zip_file_path)} bytes")  #Size of zip file: 191317 bytes
+            print("ZIP FILE PATH RECEIVED:", zip_file_path) #ZIP FILE PATH RECEIVED: artifacts_config\dataset\raw_data\books_data.zip
+            print("Exists:", os.path.exists(zip_file_path)) #Exists: True
+            print("Absolute Path:", os.path.abspath(zip_file_path)) #Absolute Path: E:\recommendation_system\artifacts_config\dataset\raw_data\books_data.zip
+            print(os.path.isdir(zip_file_path)) #False
+            print(f"Is Zip:", zipfile.is_zipfile(zip_file_path)) #Is Zip: True 
+            print(f"Is File:", os.path.isfile(zip_file_path)) #Is File: True
+ 
 
+            #debugging step to check the contents of the zip file
+            with zipfile.ZipFile(zip_file_path, 'r') as z:
+               print(z.namelist())
+            #['books_data/', 'books_data/Books.csv', 'books_data/Ratings.csv', 'books_data/Users.csv']
+
+
+            # with open(zip_file_path, 'rb') as f:
+            #     print(f.namelist())
+
+            
+
+
+            print("zip_file_path:", repr(zip_file_path))  # repr() shows hidden characters
+            print("ingested_dir:", repr(ingested_dir))
+            print("Are they same?:", zip_file_path == ingested_dir)
             with open(zip_file_path, 'rb') as f:
-                print(f.read(4))
+                print("First 4 bytes:", f.read(4))
 
             os.makedirs(ingested_dir, exist_ok=True)
             with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:

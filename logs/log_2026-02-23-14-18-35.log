@@ -1,0 +1,4 @@
+[2026-02-23 14:18:41,469 root - INFO - ====================Data Ingestion log started.==================== ]
+[2026-02-23 14:18:41,469 root - INFO - Data Ingestion Config: DatasetConfig(dataset_download_url='E:\\recommendation_system\\books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
+[2026-02-23 14:18:41,470 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\ratings.csv')]
+[2026-02-23 14:18:41,471 root - INFO - Downloading data from E:\recommendation_system\books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]

@@ -1,4 +1,0 @@
-[2026-02-17 15:07:56,477 root - INFO - ====================Data Ingestion log started.==================== ]
-[2026-02-17 15:07:56,477 root - INFO - Data Ingesti Config: DatasetConfig(dataset_download_url='https://github.com/bandulwarabhishek/book_recommendation/blob/master/books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
-[2026-02-17 15:07:56,477 root - INFO - Downloading data from https://github.com/bandulwarabhishek/book_recommendation/blob/master/books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]
-[2026-02-17 15:07:57,069 root - INFO - Data downloaded successfully and saved at artifacts_config\dataset\raw_data\books_data.zip]

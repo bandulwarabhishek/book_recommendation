@@ -1,0 +1,18 @@
+[2026-03-03 15:04:48,233 root - INFO - ====================Data Ingestion log started.==================== ]
+[2026-03-03 15:04:48,233 root - INFO - Data Ingestion Config: DatasetConfig(dataset_download_url='https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
+[2026-03-03 15:04:48,234 root - INFO - Data Validation Config: DataValidationConfig(clean_data_dir='artifacts_config\\dataset\\clean_data', serialized_objects_dir='artifacts_config\\dataset\\serialized_objects', books_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Books.csv', ratings_csv_file='artifacts_config\\dataset\\ingested_data\\BX-Book-Ratings.csv')]
+[2026-03-03 15:04:48,244 root - INFO - Downloading data from https://github.com/entbappy/Branching-tutorial/raw/master/books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 15:04:55,130 root - INFO - Data downloaded successfully and saved at artifacts_config\dataset\raw_data\books_data.zip]
+[2026-03-03 15:04:56,010 root - INFO - Extracting zip file: artifacts_config\dataset\raw_data\books_data.zip into directory: artifacts_config\dataset\ingested_data]
+[2026-03-03 15:04:56,010 root - INFO - ====================Data Ingestion completed. ==================== 
+
+]
+[2026-03-03 15:04:56,010 root - INFO - ====================Data Validation log started.==================== ]
+[2026-03-03 15:04:59,269 root - INFO -  Shape of ratings data file: (1149780, 3)]
+[2026-03-03 15:04:59,270 root - INFO -  Shape of books data file: (271360, 8)]
+[2026-03-03 15:05:01,106 root - INFO -  Shape of the final clean dataset: (59850, 9)]
+[2026-03-03 15:05:01,432 root - INFO - Saved cleaned data to artifacts_config\dataset\clean_data]
+[2026-03-03 15:05:01,477 root - INFO - Saved final_rating serialization object to artifacts_config\dataset\serialized_objects]
+[2026-03-03 15:05:01,578 root - INFO - ====================Data Validation log completed.==================== 
+
+]

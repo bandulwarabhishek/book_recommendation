@@ -1,3 +1,0 @@
-[2026-02-17 14:51:18,557 root - INFO - ====================Data Ingestion log started.==================== ]
-[2026-02-17 14:51:18,557 root - INFO - Data Ingesti Config: DatasetConfig(dataset_download_url='C:\\Users\\abhishek\\Downloads\\books_data.zip', ingested_dir='artifacts_config\\dataset\\ingested_data', raw_data_dir='artifacts_config\\dataset\\raw_data')]
-[2026-02-17 14:51:18,582 root - INFO - Downloading data from C:\Users\abhishek\Downloads\books_data.zip into file artifacts_config\dataset\raw_data\books_data.zip]

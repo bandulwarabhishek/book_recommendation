@@ -1,3 +1,4 @@
 venv
 Dockerfile
 books.pkl
+artifacts/*
